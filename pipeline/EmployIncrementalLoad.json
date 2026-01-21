@@ -82,10 +82,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": {
-							"value": "@{concat(\n'SELECT EmployeeId, Full_Name, Department, Salary, LastModifiedDate ',\n'FROM dbo.Employees ',\n'WHERE LastModifiedDate > ''',\nactivity('Lookup1').output.firstRow.LastLoadedValue,\n''''\n)}\n",
-							"type": "Expression"
-						},
+						"sqlReaderQuery": "@{concat(\n'SELECT EmployeeID, Full_Name, Department, Location, Salary, LastModifiedDate ',\n'FROM dbo.Employees ',\n'WHERE LastModifiedDate > ''',\nformatDateTime(activity('Lookup1').output.firstRow.LastLoadedValue, 'yyyy-MM-dd HH:mm:ss'),\n''''\n)}\n",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -144,7 +141,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "/* 1) Merge incremental rows from Stage into Final */\nMERGE dbo.Employees_Final AS t\nUSING dbo.Employees_Stage AS s\nON t.EmployeeId = s.EmployeeId\nWHEN MATCHED AND s.LastModifiedDate > t.LastModifiedDate THEN\n    UPDATE SET\n        t.Name = s.Name,\n        t.Department = s.Department,\n        t.Salary = s.Salary,\n        t.LastModifiedDate = s.LastModifiedDate\nWHEN NOT MATCHED THEN\n    INSERT (EmployeeId, Name, Department, Salary, LastModifiedDate)\n    VALUES (s.EmployeeId, s.Name, s.Department, s.Salary, s.LastModifiedDate);\n\n/* 2) Update watermark only if Stage has rows */\nUPDATE dbo.ETL_Watermark\nSET LastLoadedValue =\n    CASE\n        WHEN EXISTS (SELECT 1 FROM dbo.Employees_Stage)\n        THEN (SELECT MAX(LastModifiedDate) FROM dbo.Employees_Stage)\n        ELSE LastLoadedValue\n    END\nWHERE TableName = 'EmployeeWarehouse.dbo.Employees';\n"
+							"text": "/* Merge Stage -> Final */\nMERGE dbo.Employees_Final AS t\nUSING dbo.Employees_Stage AS s\nON t.EmployeeID = s.EmployeeID\nWHEN MATCHED AND s.LastModifiedDate > t.LastModifiedDate THEN\n    UPDATE SET\n        t.Full_Name = s.Full_Name,\n        t.Department = s.Department,\n        t.Location = s.Location,\n        t.Salary = s.Salary,\n        t.LastModifiedDate = s.LastModifiedDate\nWHEN NOT MATCHED THEN\n    INSERT (EmployeeID, Full_Name, Department, Location, Salary, LastModifiedDate)\n    VALUES (s.EmployeeID, s.Full_Name, s.Department, s.Location, s.Salary, s.LastModifiedDate);\n\n/* Update watermark only if Stage has rows */\nUPDATE dbo.ETL_Watermark\nSET LastLoadedValue =\n    CASE\n        WHEN EXISTS (SELECT 1 FROM dbo.Employees_Stage)\n        THEN (SELECT MAX(LastModifiedDate) FROM dbo.Employees_Stage)\n        ELSE LastLoadedValue\n    END\nWHERE TableName = 'EmployeeWarehouse.dbo.Employees';\n"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
