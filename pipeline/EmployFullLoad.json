@@ -115,7 +115,7 @@
 						"referenceName": "AzureSqlTable1",
 						"type": "DatasetReference",
 						"parameters": {
-							"pTableName": "dbo.Employees"
+							"pTableName": "Employees"
 						}
 					}
 				]
