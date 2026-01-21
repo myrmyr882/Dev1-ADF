@@ -43,8 +43,14 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "@dataset().pSchema",
-			"table": "@dataset().pTable"
+			"schema": {
+				"value": "pSchema",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "pTable",
+				"type": "Expression"
+			}
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
