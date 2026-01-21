@@ -83,7 +83,7 @@
 					"source": {
 						"type": "SqlServerSource",
 						"sqlReaderQuery": {
-							"value": "@{concat(\n'SELECT EmployeeId, FullName, Department, Salary, LastModifiedDate ',\n'FROM dbo.Employees ',\n'WHERE LastModifiedDate > ''',\nactivity('Lookup1').output.firstRow.LastLoadedValue,\n''''\n)}\n",
+							"value": "@{concat(\n'SELECT EmployeeId, Full_Name, Department, Salary, LastModifiedDate ',\n'FROM dbo.Employees ',\n'WHERE LastModifiedDate > ''',\nactivity('Lookup1').output.firstRow.LastLoadedValue,\n''''\n)}\n",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
