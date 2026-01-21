@@ -43,12 +43,9 @@
 			}
 		],
 		"typeProperties": {
-			"schema": {
-				"value": "pSchema",
-				"type": "Expression"
-			},
+			"schema": "dbo",
 			"table": {
-				"value": "pTable",
+				"value": "@dataset().pTableName\n",
 				"type": "Expression"
 			}
 		}
