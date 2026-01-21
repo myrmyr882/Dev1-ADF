@@ -82,7 +82,10 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "@{concat(\n'SELECT EmployeeID, Full_Name, Department, Location, Salary, LastModifiedDate ',\n'FROM dbo.Employees ',\n'WHERE LastModifiedDate > ''',\nformatDateTime(activity('Lookup1').output.firstRow.LastLoadedValue, 'yyyy-MM-dd HH:mm:ss'),\n''''\n)}\n",
+						"sqlReaderQuery": {
+							"value": "@{concat(\n'SELECT EmployeeID, Full_Name, Department, Location, Salary, LastModifiedDate ',\n'FROM dbo.Employees ',\n'WHERE LastModifiedDate > ''',\nformatDateTime(activity('Lookup1').output.firstRow.LastLoadedValue, 'yyyy-MM-dd HH:mm:ss'),\n''''\n)}\n",
+							"type": "Expression"
+						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -110,7 +113,10 @@
 				"outputs": [
 					{
 						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"pTableName": "dbo.Employees_Stage"
+						}
 					}
 				]
 			},
