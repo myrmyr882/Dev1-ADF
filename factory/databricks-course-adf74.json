@@ -1,0 +1,9 @@
+{
+	"name": "databricks-course-adf74",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d69ceeaa-757e-4d33-ae3f-ad6e391ccf92",
+		"tenantId": "ae145aea-cdb2-446a-b05a-7858dde5ddba"
+	}
+}

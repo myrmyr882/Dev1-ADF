@@ -1,0 +1,40 @@
+{
+	"name": "SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer SHIR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "EmployeeID",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Full_Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Department",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Salary",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Employees"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

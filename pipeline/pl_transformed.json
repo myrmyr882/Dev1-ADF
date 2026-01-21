@@ -1,0 +1,42 @@
+{
+	"name": "pl_transformed",
+	"properties": {
+		"activities": [
+			{
+				"name": "Race-results-table",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/hmamilla@memphis.edu/Formula1-Project-Solutions/1.race_results"
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_databricks_course_ws",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"concurrency": 1,
+		"parameters": {
+			"p_window_end_date": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"v_data_source": {
+				"type": "String",
+				"defaultValue": "Ergast"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-12-28T00:30:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
