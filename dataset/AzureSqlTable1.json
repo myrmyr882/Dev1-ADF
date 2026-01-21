@@ -43,8 +43,11 @@
 			}
 		],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "Employees_Stage"
+			"schema": {
+				"value": "@dataset().pTableName\n",
+				"type": "Expression"
+			},
+			"table": ""
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/datasets"
