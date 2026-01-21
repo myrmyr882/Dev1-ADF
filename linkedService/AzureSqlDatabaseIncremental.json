@@ -11,7 +11,7 @@
 			"trustServerCertificate": true,
 			"authenticationType": "SQL",
 			"userName": "etl_user",
-			"integratedSecurity": "True",
+			"integratedSecurity": "False",
 			"pooling": "False",
 			"multipleActiveResultSets": "False",
 			"commandTimeout": "0",
