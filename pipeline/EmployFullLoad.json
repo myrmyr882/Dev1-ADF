@@ -113,7 +113,10 @@
 				"outputs": [
 					{
 						"referenceName": "AzureSqlTable1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"pTableName": "dbo.Employees"
+						}
 					}
 				]
 			},
